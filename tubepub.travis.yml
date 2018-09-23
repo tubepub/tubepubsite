@@ -1,0 +1,17 @@
+language: ruby
+script:
+  # first dump all the remote content as local files
+  - bundle exec dato dump
+  # then generate the website
+  - bundle exec dato jekyll build
+deploy:
+  provider: s3
+  access_key_id: XXX
+  secret_access_key: YYY
+  bucket: your-bucket
+  local_dir: public
+  skip_cleanup: true
+  acl: public_read
+  notifications:
+  webhooks:
+  - https://webhooks.datocms.com/SW3XuTzGK8/deploy-results
